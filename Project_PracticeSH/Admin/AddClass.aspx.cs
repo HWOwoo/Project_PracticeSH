@@ -14,7 +14,10 @@ namespace Project_PracticeSH.Admin
         CommonFnx fn = new CommonFnx();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack )
+            {
+                GetClass(); 
+            }
         }
         private void GetClass()
         {
@@ -24,7 +27,28 @@ namespace Project_PracticeSH.Admin
         }
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                DataTable dt = fn.Fetch("select * from Class where ClassName = '"+txtClass.Text.Trim()+"' ");
+                if ( dt.Rows.Count == 0 )
+                {
+                    string query = "Insert into Class values('" + txtClass.Text.Trim() + "')";
+                    fn.Query(query);
+                    IblMsg.Text = "정상적으로 추가됐습니다!";
+                    IblMsg.CssClass = "alert alert-success";
+                    txtClass.Text = string.Empty;
+                    GetClass();
+                }
+                else
+                {
+                    IblMsg.Text = "이미 동일한 데이터가 존재합니다.";
+                    IblMsg.CssClass = "alert alert-success";
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "')<script>");
+            }
         }
     }
 }

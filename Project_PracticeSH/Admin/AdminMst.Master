@@ -61,7 +61,7 @@
                         <li>
                             <a href="#">
                                 <div class="icon"><i class="fas fa-hotel"></i></div>
-                                <div class="title"> 학급</div>
+                                <div class="title">학급</div>
                                 <div class="arrow"><i class="fas fa-chevron-down"></i></div>
                             </a>
                             <ul class="accordion">
