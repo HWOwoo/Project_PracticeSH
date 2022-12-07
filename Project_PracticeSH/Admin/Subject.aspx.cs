@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Configuration;
-using System.Data.SqlClient;
 using static Project_PracticeSH.Models.CommonFn;
 
 namespace Project_PracticeSH.Admin
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class WebForm2 : System.Web.UI.Page
     {
+
         CommonFnx fn = new CommonFnx();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -20,7 +22,7 @@ namespace Project_PracticeSH.Admin
             if (!IsPostBack)
             {
                 GetClass();
-                GetFees();
+                GetSubject();
             }
         }
 
@@ -32,7 +34,7 @@ namespace Project_PracticeSH.Admin
             ddlClass.DataValueField = "ClassId";
             ddlClass.DataBind();
             ddlClass.Items.Insert(0, "Select Class");
-            
+
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
@@ -40,21 +42,22 @@ namespace Project_PracticeSH.Admin
             try
             {
                 string classVal = ddlClass.SelectedItem.Text;
-                DataTable dt = fn.Fetch("select * from Fees where Classid = '" + ddlClass.SelectedItem.Value + "' "); // gridview에 data 불러들이기.
+                DataTable dt = fn.Fetch("select * from Subject where ClassId = '" + ddlClass.SelectedItem.Value +
+                    "' and SubjectName = '"+textSubject.Text.Trim()+"' "); // gridview에 data 불러들이기.
                 if (dt.Rows.Count == 0)
                 {
-                    string query = "Insert into Fees values('" +ddlClass.SelectedItem.Value+ "','"+textFeeAmounts.Text.Trim()+"')"; 
+                    string query = "Insert into Subject values('" + ddlClass.SelectedItem.Value + "','" + textSubject.Text.Trim() + "')";
                     fn.Query(query);
                     IblMsg.Text = "정상적으로 추가됐습니다!";
                     IblMsg.CssClass = "alert alert-success";
                     ddlClass.SelectedIndex = 0;
-                    textFeeAmounts.Text = string.Empty;
-                    GetFees();
+                    textSubject.Text = string.Empty;
+                    GetSubject();
                 }
                 else
                 {
                     IblMsg.Text = "이미 동일한 데이터가 존재합니다.";
-                    IblMsg.CssClass = "alert alert-success";
+                    IblMsg.CssClass = "alert alert-stextSubjectuccess";
                 }
             }
             catch (Exception ex)
@@ -62,9 +65,10 @@ namespace Project_PracticeSH.Admin
                 Response.Write("<script>alert('" + ex.Message + "')<script>");
             }
         }
-        private void GetFees()
+        private void GetSubject()
         {
-            DataTable dt = fn.Fetch(@"select Row_NUMBER() over(Order by (Select 1)) as [Sr.No], f.FeesId, f.ClassId, c.ClassName, f.FeesAmount from Fees f inner join Class c on c.ClassId = f.ClassId");
+            DataTable dt = fn.Fetch(@"select Row_NUMBER() over(Order by (Select 1)) as [Sr.No], s.SubjectId, s.ClassId, c.ClassName, s.SubjectName 
+                                    from Subject s inner join Class c on c.ClassId = s.ClassId");
             GridView1.DataSource = dt;
             GridView1.DataBind();
         }
@@ -72,38 +76,19 @@ namespace Project_PracticeSH.Admin
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             GridView1.PageIndex = e.NewPageIndex;
-            GetFees();
+            GetSubject();
         }
 
         protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             GridView1.EditIndex = -1;
-            GetFees();
-        }
-
-        protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            try
-            {
-                int feesId = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0]);
-                fn.Query("Delete from Fees where FeesId = '"+feesId+"' ");
-                IblMsg.Text = "삭제됐습니다.";
-                IblMsg.CssClass = "alert alert-success";
-                GridView1.EditIndex = -1;
-                GetFees();
-                    
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('" + ex.Message + "')<script>");
-
-            }
+            GetSubject();
         }
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
             GridView1.EditIndex = e.NewEditIndex;
-            GetFees();
+            GetSubject();
         }
 
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -111,13 +96,14 @@ namespace Project_PracticeSH.Admin
             try
             {
                 GridViewRow row = GridView1.Rows[e.RowIndex];
-                int feesId = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0]);
-                string feeAmt = (row.FindControl("TextBox1") as TextBox).Text;
-                fn.Query("Update Fees set FeesAmount = '"+feeAmt.Trim()+"' where FeesId = '"+feesId+"' " );
-                IblMsg.Text = "금액이 업데이트 됐습니다.";
+                int subId = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0]);
+                string classId = ((DropDownList)GridView1.Rows[e.RowIndex].Cells[2].FindControl("DropDownList1")).SelectedValue;
+                string subjName = (row.FindControl("TextBox1") as TextBox).Text;
+                fn.Query("Update Subject set ClassId = '" +  classId + "', SubjectName = '"+ subjName + "' where SubjectId = '" + subId + "' ");
+                IblMsg.Text = "과제가 업데이트 됐습니다.";
                 IblMsg.CssClass = "alert alert-success";
                 GridView1.EditIndex = -1;
-                GetFees();
+                GetSubject();
             }
             catch (Exception ex)
             {

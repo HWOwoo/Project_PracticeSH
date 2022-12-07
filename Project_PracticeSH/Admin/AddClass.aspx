@@ -24,7 +24,7 @@
 
             <div class="row mb-3 mr-lg-5 ml-lg-5">
                 <div class="col-md-3 col-md-offset-2 mb-3">
-                    <asp:Button ID="btnAdd" runat="server" CssClass="btn btn-primary btn-block" BackColor="#5558C9" Text="추가" OnClick="btnAdd_Click"/>
+                    <asp:Button ID="btnAdd" runat="server" CssClass="btn btn-primary btn-block" BackColor="#3CB371" Text="추가" OnClick="btnAdd_Click"/>
                 </div>
             </div>
 
@@ -32,12 +32,12 @@
                 <div class="col-md-6">
                     <asp:GridView ID="GridView1" runat="server" CssClass="table table-hover table-bordered" DataKeyNames="ClassId" AutoGenerateColumns="False" 
                         EmptyDataText="데이터가 없습니다" OnPageIndexChanging="GridView1_PageIndexChanging" OnRowCancelingEdit="GridView1_RowCancelingEdit" 
-                        OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" AllowPaging="true" PageSize="4" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+                        OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" AllowPaging="True" PageSize="4" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                         <Columns>
                             <asp:BoundField DataField="Sr.No" HeaderText="Sr.No" ReadOnly="True">
                             <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
-                            <asp:TemplateField HeaderText="Class">
+                            <asp:TemplateField HeaderText="학급이름">
                                 <EditItemTemplate>
                                     <asp:TextBox ID="textClassEdit" runat="server" Text='<%# Eval("ClassName") %>' CssClass="form-control"></asp:TextBox>
                                 </EditItemTemplate>
@@ -46,9 +46,9 @@
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
-                            <asp:CommandField CausesValidation="False" HeaderText="Operation" ShowEditButton="True" />
+                            <asp:CommandField CausesValidation="False" HeaderText="관리" ShowEditButton="True" />
                         </Columns>
-                        <HeaderStyle BackColor="#5558C9" ForeColor="White"/>
+                        <HeaderStyle BackColor="#3CB371" ForeColor="White"/>
                     </asp:GridView>
                 </div>
             </div>

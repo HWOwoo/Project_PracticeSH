@@ -7,8 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title> 학교 매니지먼트 </title>
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-        <link href="../Content/styles.css" rel="stylesheet" />
-        <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="../Content/styles.css?a" rel="stylesheet" />
+        <link href="../Content/bootstrap.min.css?a" rel="stylesheet" />
         <script src="../Scripts/jquery-3.0.0.js"></script>
         <script src="../Scripts/popper.js"></script>
         <script src="../Scripts/bootstrap.min.js"></script>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
 
-                    <ul class="siderbar_menu">
+                    <ul class="siderbar_menu" >
                         <li>
                             <a href="../Admin/AdminHome.aspx">
                                 <div class="icon"><i class="fas fa-home"></i></div>

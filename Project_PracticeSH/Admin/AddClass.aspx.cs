@@ -75,6 +75,7 @@ namespace Project_PracticeSH.Admin
                 GridViewRow row = GridView1.Rows[e.RowIndex];
                 int cId = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0]);
                 string ClassName = (row.FindControl("textClassEdit") as TextBox).Text;
+                /* string ClassName = row.findControl.textClassEdit as TextBox.Text */
                 fn.Query("update Class set ClassName = '" + ClassName + "' where ClassId = '" + cId + "'");
                 IblMsg.Text = "정상적으로 수정됐습니다!";
                 IblMsg.CssClass = "alert alert-success";

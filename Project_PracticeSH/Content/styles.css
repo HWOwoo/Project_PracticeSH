@@ -45,7 +45,7 @@ body {
     top: 0;
     left: 0;
     height: 100vh;
-    background: #5558c9;
+    background: #3CB371;
     z-index: 999;
     transition: all 0.3s ease;
 }
@@ -79,11 +79,11 @@ body {
     }
 
     .sidebar_inner .profile_info .profile_data span {
-        color: #c4dcff;
+        color: #B5FFD6;
     }
 
 .sidebar_inner .siderbar_menu {
-    height: 500px;
+    height: 510px;
     overflow: auto;
 }
 
@@ -93,7 +93,7 @@ body {
         align-items: center;
         position: relative;
         margin-bottom: 1px;
-        color: #c4dcff;
+        color: #CFF7E1;
     }
 
         .sidebar_inner .siderbar_menu > li > a .icon {
@@ -103,7 +103,7 @@ body {
 
         .sidebar_inner .siderbar_menu > li.active > a,
         .sidebar_inner .siderbar_menu > li > a:hover {
-            background: #3d3d79;
+            background: #48BA7B;
             color: #fff;
             text-decoration: none !important;
         }
@@ -131,7 +131,7 @@ body {
 
     .sidebar .logout_btn a:hover {
         background: #fff;
-        color: #3d3d79;
+        color: #48BA7B;
         text-decoration: none;
     }
 
@@ -170,7 +170,7 @@ body {
 
     .navbar .logo a {
         font-family: 'Trade Winds';
-        color: #5558c9;
+        color: #3CB371;
         font-size: 20px;
     }
 
@@ -189,7 +189,7 @@ body {
     }
 
 .accordion {
-    background: #6f6fc7;
+    background: #48BA7B;
     padding-left: 20px;
     height: 0px;
     transition: all 0.3s ease;
@@ -198,7 +198,7 @@ body {
 
     .accordion li a {
         display: block;
-        color: #c4dcff;
+        color: white;
         padding: 12px 0;
         padding-left: 10px;
     }
@@ -213,7 +213,7 @@ body {
     }
 
     .accordion li a:hover {
-        background: #3d3d79;
+        background: #187843;
         color: #fff;
     }
 

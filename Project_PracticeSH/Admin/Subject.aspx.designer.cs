@@ -11,7 +11,7 @@ namespace Project_PracticeSH.Admin
 {
 
 
-    public partial class WebForm1
+    public partial class WebForm2
     {
 
         /// <summary>
@@ -42,13 +42,13 @@ namespace Project_PracticeSH.Admin
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
-        /// textFeeAmounts 컨트롤입니다.
+        /// textSubject 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textFeeAmounts;
+        protected global::System.Web.UI.WebControls.TextBox textSubject;
 
         /// <summary>
         /// btnAdd 컨트롤입니다.
