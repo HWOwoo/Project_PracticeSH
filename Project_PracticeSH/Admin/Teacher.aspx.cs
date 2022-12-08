@@ -30,7 +30,7 @@ namespace Project_PracticeSH.Admin
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
-        {
+        {4t
             try
             {
                 if( ddlGender.SelectedValue != "0" ) // 성별값이 입력되지 않았을 경우 (기본값 0)
