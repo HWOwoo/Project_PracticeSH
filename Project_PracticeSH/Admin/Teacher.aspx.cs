@@ -24,39 +24,38 @@ namespace Project_PracticeSH.Admin
 
         private void GetTeachers()
         {
-            DataTable dt = fn.Fetch(@"SELECT ROW_NUMBER() OVER(ORDER BY (SELECT 1)) as [Sr.No], TeacherId, [Name], DOB, Gender, Mobile, Email, [Address], [Password] from Teacher");
+            DataTable dt = fn.Fetch(@"SELECT ROW_NUMBER() OVER(ORDER BY (SELECT 1)) as [Sr.No], [Password], TeacherId, [Name], DOB, Gender, Mobile, Email, [Address] from Teacher");
             GridView1.DataSource = dt;
             GridView1.DataBind();
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
-        {4t
+        {
             try
             {
                 if( ddlGender.SelectedValue != "0" ) // 성별값이 입력되지 않았을 경우 (기본값 0)
                 {
                     string email = textEmail.Text.Trim();
-                    DataTable dt = fn.Fetch("SELECT * FROM Teacher WHERE Eamil = '"+email+"' ");
+                    DataTable dt = fn.Fetch("SELECT * FROM Teacher WHERE Email = '"+email+"' ");
+
                     if ( dt.Rows.Count == 0 )
                     {
-                        string query = "INSERT INTO Teacher VALUES ('" + textName.Text.Trim() + "', '" + textDoB.Text.Trim() + "', '" +
-                            ddlGender.SelectedValue + "', '" + textMobile.Text.Trim() + "', '" + textEmail.Text.Trim() + "', '" +
-                            textAddress.Text.Trim() + "', '" + txtPassword.Text.Trim() + "')";
+                        string query = "Insert into Teacher values ('" + txtPassword.Text.Trim() + "','" + textName.Text.Trim() + "', '" + textDOB.Text.Trim() + "', '" +ddlGender.SelectedValue + "', '" + textMobile.Text.Trim() + "',  '" + textAddress.Text.Trim() + "', '" + textEmail.Text.Trim() + "')";
                         fn.Query(query);
                         IblMsg.Text = "정상적으로 추가됐습니다!";
                         IblMsg.CssClass = "alert alert-success";
                         ddlGender.SelectedIndex = 0;
+                        txtPassword.Text = string.Empty;
                         textName.Text = string.Empty;
-                        textDoB.Text = string.Empty;
+                        textDOB.Text = string.Empty;
                         textMobile.Text = string.Empty;
                         textEmail.Text = string.Empty;
                         textAddress.Text = string.Empty;
-                        txtPassword.Text = string.Empty;
                         GetTeachers();
                     }
                     else
                     {
-                        IblMsg.Text = "이미 동일한 <b>'" + email + "' <br> 존재합니다.";
+                        IblMsg.Text = "이미 동일한 정보가 존재합니다.";
                         IblMsg.CssClass = "alert alert-stextSubjectuccess";
 
                     }
